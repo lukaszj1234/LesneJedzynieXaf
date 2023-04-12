@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <DetailView Id="Nieobecnosci_DetailView" AllowDelete="False" AllowEdit="True" AllowNew="False" />
+    <ListView Id="Nieobecnosci_ListView" AllowDelete="False" AllowEdit="False" AllowLink="False" AllowNew="False" />
+  </Views>
+  <NavigationItems Id="NavigationItems">
+    <Items Id="Items">
+      <Item Id="Nieobecnosci" ViewId="Nieobecnosci_ListView" />
+    </Items>
+  </NavigationItems>
+</Application>

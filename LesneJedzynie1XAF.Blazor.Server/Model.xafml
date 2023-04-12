@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="Leśne jedzynie">
+  <NavigationItems NavigationStyle="Accordion">
+    <Items>
+      <Item Id="Zestawienie" Index="0" ViewId="ZestawiynieNp_DetailView" IsNewNode="True" />
+      <Item Id="Uzytkownicy" Index="1" Caption="Rodzice" />
+      <Item Id="Dzieci" ViewId="Dziecko_ListView" Caption="Dzieci" Index="2" IsNewNode="True" />
+      <Item Id="Nieobecnosci" Caption="Nieobeności" Index="3" ViewId="Nieobecnosc_ListView" IsNewNode="True" />
+      <Item Id="Administracja" Index="4" Caption="Administracja" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="DniWolne" Caption="Dni wolne" ViewId="DzienWolny_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Default" Removed="True" />
+      <Item Id="Reports" Removed="True" />
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="22.2.4.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
+    <DetailView Id="Dziecko_DetailView" AllowDelete="False" AllowEdit="True" AllowNew="False" />
+    <ListView Id="Dziecko_ListView" AllowEdit="False" AllowDelete="False" AllowLink="False" AllowNew="False" />
+    <DetailView Id="Nieobecnosc_DetailView" AllowDelete="False" AllowNew="False" />
+    <ListView Id="Nieobecnosc_ListView" AllowDelete="True" AllowNew="False" AllowEdit="False" AllowUnlink="False" />
+    <DetailView Id="ZestawiynieNp_DetailView" Caption="Zestawienie" AllowDelete="False" AllowEdit="True" AllowNew="False">
+      <HiddenActions>
+        <ActionLink ActionId="Close" IsNewNode="True" />
+        <ActionLink ActionId="Save" IsNewNode="True" />
+      </HiddenActions>
+      <Layout>
+        <LayoutGroup Id="Main">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="ZestawiynieNp" Direction="Horizontal" />
+          </LayoutGroup>
+          <LayoutGroup Id="Nieobecnosci_Group" Direction="Vertical" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>
