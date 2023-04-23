@@ -2,8 +2,7 @@
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Core;
-using LesneJedzynie.Models;
-using LesneJedzynie1XAF.Blazor.Server.DTO;
+using LesneJedzynie1XAF.Blazor.Server.DTO.LesneJedzynie;
 using LesneJedzynie1XAF.Module.BusinessObjects;
 using Microsoft.AspNetCore.Mvc;
 using SMSApi.Api.Action;

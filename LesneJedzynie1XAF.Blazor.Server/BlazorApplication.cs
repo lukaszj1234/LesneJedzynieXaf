@@ -19,7 +19,7 @@ public class LesneJedzynie1XAFBlazorApplication : BlazorApplication {
         base.OnSetupStarted();
 #if DEBUG
         if(System.Diagnostics.Debugger.IsAttached && CheckCompatibilityType == CheckCompatibilityType.DatabaseSchema) {
-            DatabaseUpdateMode = DatabaseUpdateMode.UpdateDatabaseAlways;
+            DatabaseUpdateMode = DatabaseUpdateMode.Never;
         }
 #endif
     }

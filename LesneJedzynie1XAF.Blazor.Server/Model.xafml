@@ -12,11 +12,16 @@
         </Items>
       </Item>
       <Item Id="Default" Removed="True" />
+      <Item Id="Podlewaczka" Caption="Podlewaczka" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="@0a321a20-ddca-40d6-a418-332b08d7dd27" ViewId="OdczytPodlewaczka_ListView" IsNewNode="True" />
+        </Items>
+      </Item>
       <Item Id="Reports" Removed="True" />
     </Items>
   </NavigationItems>
   <SchemaModules>
-    <SchemaModule Name="SystemModule" Version="22.2.4.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="22.2.5.0" IsNewNode="True" />
   </SchemaModules>
   <Views DefaultListEditor="DevExpress.ExpressApp.Blazor.Editors.DxGridListEditor">
     <DetailView Id="Dziecko_DetailView" AllowDelete="False" AllowEdit="True" AllowNew="False" />

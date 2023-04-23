@@ -1,11 +1,10 @@
-﻿using LesneJedzynie1XAF.Blazor.Server.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LesneJedzynie.Models
+namespace LesneJedzynie1XAF.Blazor.Server.DTO.LesneJedzynie
 {
     public class WysylkaDTO
     {

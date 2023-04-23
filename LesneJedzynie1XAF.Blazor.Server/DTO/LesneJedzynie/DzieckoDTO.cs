@@ -1,6 +1,6 @@
 ﻿using LesneJedzynie1XAF.Enums;
 
-namespace LesneJedzynie1XAF.Blazor.Server.DTO
+namespace LesneJedzynie1XAF.Blazor.Server.DTO.LesneJedzynie
 {
     public class DzieckoDTO
     {
@@ -8,6 +8,6 @@ namespace LesneJedzynie1XAF.Blazor.Server.DTO
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public Plec Plec { get; set; }
-    public List<DzienDTO> Dni { get; set; }
+        public List<DzienDTO> Dni { get; set; }
     }
 }

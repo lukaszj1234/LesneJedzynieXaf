@@ -1,4 +1,4 @@
-﻿namespace LesneJedzynie1XAF.Blazor.Server.DTO
+﻿namespace LesneJedzynie1XAF.Blazor.Server.DTO.LesneJedzynie
 {
     public class DzienDTO
     {
