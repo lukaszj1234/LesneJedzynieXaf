@@ -1,5 +1,6 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Core;
+using LesneJedzynie1XAF.Blazor.Server.DTO.Podlewaczka;
 using LesneJedzynie1XAF.Module.BusinessObjects.Podlewaczka;
 using LesneJedzynieApi.DTO.Podlewaczka;
 using LesneJedzynieApi.WebApi.DTO.Podlewaczka;
@@ -110,7 +111,15 @@ namespace LesneJedzynie1XAF.Blazor.Server.Controllers
             using (IObjectSpace objectSpace = _objectSpaceFactory.CreateNonSecuredObjectSpace<OdczytPodlewaczka>())
             {
                 var aktualnyOdczyt = objectSpace.GetObjects<OdczytPodlewaczka>().FirstOrDefault();
-                var odczytDto = new OdczytPodlewaczkaDTO() { Napiecie = aktualnyOdczyt.Napiecie, PoziomWody = aktualnyOdczyt.PoziomWody, Wilgotnosc = aktualnyOdczyt.Wilgotnosc };
+                var odczytDto = new GetOdczytPodlewaczkaDTO() { 
+                Napiecie = aktualnyOdczyt.Napiecie,
+                PoziomWody = aktualnyOdczyt.PoziomWody,
+                Wilgotnosc = aktualnyOdczyt.Wilgotnosc,
+                DataOdczytu = aktualnyOdczyt.DataOdczytu,
+                PoziomWodyRozpoczeciePodlewania = aktualnyOdczyt.PoziomWodyRozpoczeciePodlewania,
+                RozpoczeciePodlewania = aktualnyOdczyt.RozpoczeciePodlewania,
+                ZakonczeniePodlewania = aktualnyOdczyt.ZakonczeniePodlewania
+                };
                 return Ok(JsonSerializer.Serialize(odczytDto));
             }
         }
