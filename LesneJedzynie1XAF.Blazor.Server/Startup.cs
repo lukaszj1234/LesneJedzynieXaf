@@ -28,6 +28,7 @@ public class Startup {
         services.AddServerSideBlazor();
         services.AddHttpContextAccessor();
         services.AddScoped<CircuitHandler, CircuitHandlerProxy>();
+        services.AddHostedService<MyBackgroundService>();
         services.AddXaf(Configuration, builder => {
             builder.UseApplication<LesneJedzynie1XAFBlazorApplication>();
             builder.Modules

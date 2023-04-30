@@ -1,6 +1,7 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Core;
 using LesneJedzynie1XAF.Blazor.Server.DTO.Podlewaczka;
+using LesneJedzynie1XAF.Module.BusinessObjects;
 using LesneJedzynie1XAF.Module.BusinessObjects.Podlewaczka;
 using LesneJedzynieApi.DTO.Podlewaczka;
 using LesneJedzynieApi.WebApi.DTO.Podlewaczka;
