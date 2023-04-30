@@ -6,132 +6,118 @@
              x:Class= "PodlewaczkaMobile.MainPage"
              xmlns:viewmodel ="clr-namespace:PodlewaczkaMobile.ViewModels"
              x:DataType="viewmodel:OdczytViewModel">
-    <RefreshView Command="{Binding GetOdczytCommand}">
-        <ScrollView>
-            <StackLayout>
-                <Label Grid.Column="1"
+    <Grid>
+        <RefreshView Command="{Binding GetOdczytCommand}"
+                 IsRefreshing="{Binding IsRefreshing}">
+            <ScrollView>
+                <StackLayout BackgroundColor ="#1C3327">
+                    <Label Grid.Column="1"
                                     TextColor="#C7DDD1"
                                     Text="Data odczytu"
                                     FontSize="23"
-                                    Padding="10"
+                                    Margin="0,10,0,0"
                                     HorizontalTextAlignment="Center"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold" />
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                                     TextColor="#C7DDD1"
                                     Text="{Binding Odczyt.DataOdczytu}"
                                     FontSize="23"
                                     HorizontalTextAlignment="Center"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold" />
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                                     TextColor="#C7DDD1"
+                                    Margin="0,20,0,0"
                                     Text="Rozpoczęcie podlewania"
                                     FontSize="23"
-                                    Padding="10"
                                     HorizontalTextAlignment="Center"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold" />
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                                     TextColor="#C7DDD1"
                                     Text="{Binding Odczyt.RozpoczeciePodlewania}"
                                     FontSize="23"
                                     HorizontalTextAlignment="Center"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold" />
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                                     TextColor="#C7DDD1"
+                                    Margin="0,20,0,0"
                                     Text="Zakończenie podlewania"
                                     FontSize="23"
-                                    Padding="10"
                                     HorizontalTextAlignment="Center"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold" />
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                                     TextColor="#C7DDD1"
                                     Text="{Binding Odczyt.ZakonczeniePodlewania}"
                                     FontSize="23"
                                     HorizontalTextAlignment="Center"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold" />
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                                     TextColor="#C7DDD1"
                                     Text="Poziom wody"
                                     FontSize="23"
-                                    Padding="10"
+                                    Margin="0,20,0,0"
                                     HorizontalTextAlignment="Center"
                                     VerticalOptions="Center"
                                     FontAttributes="Bold" />
-                <telerik:RadHorizontalGauge x:Name="gauge" BindingContext="{Binding Odczyt.PoziomWody}" Margin="10">
-                    <telerik:RadHorizontalGauge.Axis>
-                        <telerik:GaugeLinearAxis Maximum="100"
-                                   Minimum="0"
-                                   Step="25" />
-                    </telerik:RadHorizontalGauge.Axis>
-                    <telerik:RadHorizontalGauge.Indicators>
-                        <telerik:GaugeShapeIndicator Value="90" />
-                    </telerik:RadHorizontalGauge.Indicators>
-                    <telerik:RadHorizontalGauge.Ranges>
-                        <telerik:GaugeRangesDefinition>
-                            <telerik:GaugeRange Color="Red"
-                                  From="0"
-                                  To="33" />
-                            <telerik:GaugeRange Color="Yellow"
-                                  From="34"
-                                  To="66" />
-                            <telerik:GaugeRange Color="Green"
-                                  From="67"
-                                  To="100" />
-                        </telerik:GaugeRangesDefinition>
-                    </telerik:RadHorizontalGauge.Ranges>
-                </telerik:RadHorizontalGauge>
-            </StackLayout>
-            
-            <!--<dxe:DateEdit
-                TextHorizontalAlignment="Center"
-                LabelFontSize="15"
-                TextFontSize="20"
-                IsEnabled="False"
-                DisplayFormat="dd-MM-yyyy"
-                LabelText="Data odczytu"
-                Date ="{Binding Odczyt.DataOdczytu, Mode=TwoWay}"/>
-                <dxe:DateEdit
-                TextHorizontalAlignment="Center"
-                LabelFontSize="15"
-                TextFontSize="20"
-                IsEnabled="False"
-                DisplayFormat="dd-MM-yyyy"
-                LabelText="Rozpoczęcie podlewania"
-                Date ="{Binding Odczyt.RozpoczeciePodlewania, Mode=TwoWay}"/>
-                <dxe:DateEdit 
-                TextHorizontalAlignment="Center"
-                LabelFontSize="15"
-                TextFontSize="20"
-                IsEnabled="False"
-                DisplayFormat="dd-MM-yyyy"
-                LabelText="Zakończenie podlewania"
-                Date ="{Binding Odczyt.ZakonczeniePodlewania, Mode=TwoWay}"/>
-                <dxe:TextEdit
-                TextHorizontalAlignment="Center"
-                LabelFontSize="15"
-                TextFontSize="20"
-                IsEnabled="False"
-                LabelText="Napięcie [V]"
-                Text ="{Binding Odczyt.Napiecie, Mode=TwoWay}"/>
-                <dxe:TextEdit
-                TextHorizontalAlignment="Center"
-                LabelFontSize="15"
-                TextFontSize="20"
-                IsEnabled="False"
-                LabelText="Wilgotność [%]"
-                Text ="{Binding Odczyt.Wilgotnosc, Mode=TwoWay}"/>
-                <dxe:TextEdit
-                TextHorizontalAlignment="Center"
-                LabelFontSize="15"
-                TextFontSize="20"
-                IsEnabled="False"
-                LabelText="Poziom wody [%]"
-                Text ="{Binding Odczyt.PoziomWody, Mode=TwoWay}"/>-->
-        </ScrollView>
-    </RefreshView>
+                    <Label Grid.Column="1"
+                                    TextColor="{Binding PoziomWodyKolor}"
+                                    Text="{Binding Odczyt.PoziomWody}"
+                                    FontSize="23"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    FontAttributes="Bold" />
+                    <Label Grid.Column="1"
+                                    TextColor="#C7DDD1"
+                                    Text="Napięcie"
+                                    FontSize="23"
+                                    Margin="0,20,0,0"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    FontAttributes="Bold" />
+                    <Label Grid.Column="1"
+                                    TextColor="{Binding NapiecieKolor}"
+                                    Text="{Binding Odczyt.Napiecie}"
+                                    FontSize="23"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    FontAttributes="Bold" />
+                    <Label Grid.Column="1"
+                                    TextColor="#C7DDD1"
+                                    Text="Wilgotność"
+                                    FontSize="23"
+                                    Margin="0,20,0,0"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    FontAttributes="Bold" />
+                    <Label Grid.Column="1"
+                                    TextColor="{Binding WilgotnoscKolor}"
+                                    Text="{Binding Odczyt.Wilgotnosc}"
+                                    FontSize="23"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    FontAttributes="Bold" />
+                    <Label Grid.Column="1"
+                                    TextColor="#C7DDD1"
+                                    Text="Poziom wody rozpoczęcie podlewania"
+                                    Margin="0,20,0,0"
+                                    FontSize="23"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    FontAttributes="Bold" />
+                    <Label Grid.Column="1"
+                                    TextColor="{Binding PoziomRozpoczecieKolor}"
+                                    Text="{Binding Odczyt.PoziomWodyRozpoczeciePodlewania}"
+                                    FontSize="23"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalOptions="Center"
+                                    FontAttributes="Bold" />
+                </StackLayout>
+            </ScrollView>
+        </RefreshView>
+    </Grid>
 </ContentPage>

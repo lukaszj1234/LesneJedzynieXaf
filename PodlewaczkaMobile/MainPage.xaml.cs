@@ -10,15 +10,14 @@ namespace PodlewaczkaMobile
         {
             InitializeComponent();
             var service = new OdczytSerwis();
-            OdczytViewModel viewModel = new OdczytViewModel(service);
+            OdczytViewModel viewModel = new OdczytViewModel();
             try
             {
-                viewModel.Odczyt = Task.Run(() => service.GetOdczyt()).Result;
-                viewModel.Odczyt.PoziomWody = 10;
-            }
-            catch (Exception ex)
+                viewModel.GetOdczytPubliczny();
+            }catch(Exception e)
             {
-                viewModel.Odczyt = new GetOdczytPodlewaczkaDTO() { DataOdczytu = DateTime.Now };
+                Shell.Current.DisplayAlert("Coś poszło nie tak", e.Message, "OK");
+                return;
             }
 
             BindingContext = viewModel;

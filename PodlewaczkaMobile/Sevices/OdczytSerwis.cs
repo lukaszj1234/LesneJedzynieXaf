@@ -7,20 +7,15 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using PodlewaczkaMobile.DTO;
+using PodlewaczkaMobile.Models;
 
 namespace PodlewaczkaMobile.Sevices
 {
     public class OdczytSerwis
     {
-        HttpClient httpClient;
-
-        public OdczytSerwis()
-        {
-            httpClient = new HttpClient();
-        }
-
         public async Task<GetOdczytPodlewaczkaDTO> GetOdczyt()
         {
+            var httpClient = new HttpClient();
             var url = "https://bernoulli-001-site1.dtempurl.com/Podlewaczka/GetOdczyt";
             HttpResponseMessage response;
             GetOdczytPodlewaczkaDTO result = null;
@@ -33,6 +28,22 @@ namespace PodlewaczkaMobile.Sevices
             }
 
             return result;
+        }
+
+        public static OdczytPodlewaczka ZamienDtoNaobiekt(GetOdczytPodlewaczkaDTO odczytDto)
+        {
+            var odczyt = new OdczytPodlewaczka()
+            {
+                DataOdczytu = odczytDto.DataOdczytu.ToString("dd-MM-yyyy HH:mm:ss"),
+                Napiecie = odczytDto.Napiecie.ToString() + "V",
+                PoziomWody = odczytDto.PoziomWody.ToString() + "%",
+                PoziomWodyRozpoczeciePodlewania = odczytDto.PoziomWodyRozpoczeciePodlewania.ToString() + "%",
+                RozpoczeciePodlewania = odczytDto.RozpoczeciePodlewania.ToString("dd-MM-yyyy HH:mm:ss"),
+                Wilgotnosc = odczytDto.Wilgotnosc.ToString() + "%",
+                ZakonczeniePodlewania = odczytDto.ZakonczeniePodlewania.ToString("dd-MM-yyyy HH:mm:ss"),
+            };
+
+            return odczyt;
         }
     }
 }

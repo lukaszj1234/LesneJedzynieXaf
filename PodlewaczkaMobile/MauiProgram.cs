@@ -5,7 +5,6 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using PodlewaczkaMobile;
 using PodlewaczkaMobile.Sevices;
-using Telerik.Maui.Controls.Compatibility;
 
 namespace Podlewaczka
 {
@@ -16,7 +15,6 @@ namespace Podlewaczka
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseTelerik()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
