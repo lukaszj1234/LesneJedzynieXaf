@@ -15,6 +15,7 @@
       <Item Id="Podlewaczka" Caption="Podlewaczka" IsNewNode="True">
         <Items IsNewNode="True">
           <Item Id="@0a321a20-ddca-40d6-a418-332b08d7dd27" ViewId="OdczytPodlewaczka_ListView" IsNewNode="True" />
+          <Item Id="@f8597e98-eedd-4bc0-b39d-8c5fe3d967bf" ViewId="KonfiguracjaPodlewaczka_ListView" IsNewNode="True" />
         </Items>
       </Item>
       <Item Id="Reports" Removed="True" />

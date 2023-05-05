@@ -1,6 +1,7 @@
 ﻿using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Core;
 using LesneJedzynie1XAF.Blazor.Server.DTO.Podlewaczka;
+using LesneJedzynie1XAF.Blazor.Server.Services.SmsSender;
 using LesneJedzynie1XAF.Module.BusinessObjects;
 using LesneJedzynie1XAF.Module.BusinessObjects.Podlewaczka;
 using LesneJedzynieApi.DTO.Podlewaczka;
@@ -19,15 +20,27 @@ namespace LesneJedzynie1XAF.Blazor.Server.Controllers
             _objectSpaceFactory = objectSpaceFactory;
         }
 
-        //public IActionResult Dupa()
-        //{
-        //    var dane = _context.OdczytyPodlewaczka.FirstOrDefault();
-        //    if(dane == null)
-        //    {
-        //        dane = new OdczytPodlewaczka();
-        //    }
-        //    return View(dane);
-        //}
+        [HttpGet]
+        public async Task<IActionResult> GetKonfiguracja()
+        {
+            using (IObjectSpace objectSpace = _objectSpaceFactory.CreateNonSecuredObjectSpace<KonfiguracjaPodlewaczka>())
+            {
+                var konfiguracja = objectSpace.GetObjects<KonfiguracjaPodlewaczka>().FirstOrDefault();
+                var konfiguracjaDTO = new KonfiguracjaDTO()
+                {
+                    CzasSpania = konfiguracja.CzasSpania,
+                    DlugoscPodlewania = konfiguracja.DlugoscPodlewania,
+                    DlugoscPrzerwy = konfiguracja.DlugoscPrzerwy,
+                    GodzinaPodlewaniaDo = konfiguracja.GodzinaPodlewaniaDo,
+                    GodzinaPodlewaniaOd = konfiguracja.GodzinaPodlewaniaOd,
+                    LiczbaCykliPodlewania = konfiguracja.LiczbaCykliPodlewania,
+                    MinPoziomWody = konfiguracja.MinPoziomWody,
+                    Wilgotnosc = konfiguracja.WilgotnoscPodlewanie
+                };
+
+                return Ok(JsonSerializer.Serialize(konfiguracjaDTO));
+            }
+        }
 
         [HttpPost]
         public async void DodajOdczyt([FromBody] OdczytPodlewaczkaDTO odczytJson)
@@ -78,6 +91,25 @@ namespace LesneJedzynie1XAF.Blazor.Server.Controllers
 
                 aktualnyOdczyt.Session.CommitTransaction();
             }
+            using (IObjectSpace konfiguracjaObjectSpace = _objectSpaceFactory.CreateNonSecuredObjectSpace<KonfiguracjaPodlewaczka>())
+            {
+                var konfiguracja = konfiguracjaObjectSpace.GetObjects<KonfiguracjaPodlewaczka>().FirstOrDefault();
+                if(odczytJson.PoziomWody < konfiguracja.PowiadomieniePoziomWody)
+                {
+                    try
+                    {
+                        Sender.WyslijSms($"Niski poziom wody w zbiorniku : {odczytJson.PoziomWody}%", "723284291");
+                    }catch(Exception e) { }
+                }
+                if (odczytJson.Napiecie < konfiguracja.PowiadomienieNapiecie)
+                {
+                    try
+                    {
+                        Sender.WyslijSms($"Niskie napięcie na akumulatorze : {odczytJson.Napiecie}V", "723284291");
+                    }
+                    catch (Exception e) { }
+                }
+            }
         }
 
         [HttpPost]
@@ -112,14 +144,15 @@ namespace LesneJedzynie1XAF.Blazor.Server.Controllers
             using (IObjectSpace objectSpace = _objectSpaceFactory.CreateNonSecuredObjectSpace<OdczytPodlewaczka>())
             {
                 var aktualnyOdczyt = objectSpace.GetObjects<OdczytPodlewaczka>().FirstOrDefault();
-                var odczytDto = new GetOdczytPodlewaczkaDTO() { 
-                Napiecie = aktualnyOdczyt.Napiecie,
-                PoziomWody = aktualnyOdczyt.PoziomWody,
-                Wilgotnosc = aktualnyOdczyt.Wilgotnosc,
-                DataOdczytu = aktualnyOdczyt.DataOdczytu,
-                PoziomWodyRozpoczeciePodlewania = aktualnyOdczyt.PoziomWodyRozpoczeciePodlewania,
-                RozpoczeciePodlewania = aktualnyOdczyt.RozpoczeciePodlewania,
-                ZakonczeniePodlewania = aktualnyOdczyt.ZakonczeniePodlewania
+                var odczytDto = new GetOdczytPodlewaczkaDTO()
+                {
+                    Napiecie = aktualnyOdczyt.Napiecie,
+                    PoziomWody = aktualnyOdczyt.PoziomWody,
+                    Wilgotnosc = aktualnyOdczyt.Wilgotnosc,
+                    DataOdczytu = aktualnyOdczyt.DataOdczytu,
+                    PoziomWodyRozpoczeciePodlewania = aktualnyOdczyt.PoziomWodyRozpoczeciePodlewania,
+                    RozpoczeciePodlewania = aktualnyOdczyt.RozpoczeciePodlewania,
+                    ZakonczeniePodlewania = aktualnyOdczyt.ZakonczeniePodlewania
                 };
                 return Ok(JsonSerializer.Serialize(odczytDto));
             }
@@ -131,7 +164,7 @@ namespace LesneJedzynie1XAF.Blazor.Server.Controllers
             var polandTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Central European Standard Time");
             DateTime utcTime = DateTime.Now.ToUniversalTime();
             var data = TimeZoneInfo.ConvertTimeFromUtc(utcTime, polandTimeZone);
-            var dataDto = new DataDTO() { Data  = data};
+            var dataDto = new DataDTO() { Data = data };
             return Ok(JsonSerializer.Serialize(dataDto));
         }
     }
